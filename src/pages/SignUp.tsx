@@ -7,9 +7,18 @@ import { Label } from "../components/Label";
 import { TextInput } from "../components/TextInput";
 import { ISignUpValues } from "../models/user";
 import lock from '../assets/lock-alt-open.svg';
+import logo from '../assets/logo.svg';
+import arrow from '../assets/arrow.svg';
+import { LoginButton } from "../components/LoginButton";
+import { P } from "../components/P";
+import { Link } from "../components/Link";
+import { theme } from "../theme/theme";
+import { Menu } from "../components/Menu";
+
 
 const validationSchema = yup.object({
   name: yup.string().required("Insert user name"),
+  email: yup.string().required("Insert email"),
   password: yup.string().required("Insert password"),
 });
 
@@ -20,6 +29,7 @@ const initialValues: ISignUpValues = {
 };
 
 export const SignUp = () => {
+  
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: validationSchema,
@@ -29,6 +39,55 @@ export const SignUp = () => {
   });
 
   return (
+    // <div className="formBox">
+    //   <form action="">
+    //     <h1 className="formHeader">Sign Up</h1>
+    //     <label className="label" htmlFor="name">Full Name</label>
+
+    //     <div>
+    //      <input
+    //       data-testid="input"
+    //       className="textInput"
+    //       id="name"
+    //       name="name"
+    //       type="text"
+    //     />
+    //     </div>
+
+    //     <label className="label" htmlFor="email">Email</label>
+
+    //     <div>
+    //      <input
+    //       data-testid="password"
+    //       className="textInput"
+    //       id="email"
+    //       name="email"
+    //       type="text"
+    //     />
+    //     </div>
+
+    //     <label className="label" htmlFor="password">Password</label>
+
+    //     <div>
+    //      <input
+    //       data-testid="password"
+    //       className="textInput"
+    //       id="password"
+    //       name="password"
+    //       type="password"
+    //     />
+    //     </div>
+    //   </form>
+    // </div>
+    <>
+    <Menu> 
+      <img src={logo} alt="" />
+
+      
+      <Link style={{marginLeft:'44px'}} color={theme.header}> <img src={arrow} alt="" /> Back  </Link>
+
+    </Menu>
+    
     <FormBox>
       <form
         data-testid="submit"
@@ -38,11 +97,9 @@ export const SignUp = () => {
 
         <FormHeader>Sign Up</FormHeader>
         <Label>Full Name</Label>
-        <div>
         <TextInput
           data-testid="input"
-          className="mt-5"
-          theme={!formik.errors.name}
+          // theme={!formik.errors.name}
           // placeholder="Full Name"
           id="name"
           name="name"
@@ -50,13 +107,10 @@ export const SignUp = () => {
           onChange={formik.handleChange}
           value={formik.values.name}
         />
-        </div>
         <Label>Email</Label>
-        <div>
         <TextInput
           data-testid="input"
-          className="mt-5"
-          theme={!formik.errors.name}
+          // theme={!formik.errors.email}
           // placeholder="Email"
           id="email"
           name="email"
@@ -64,25 +118,33 @@ export const SignUp = () => {
           onChange={formik.handleChange}
           value={formik.values.email}
         />
-        </div>
-        <Label>Password</Label>
-        <div>
+        <Label htmlFor="name">Password</Label>
+        <div style={{position: 'relative', textAlign:'center'}}>
         <TextInput
           data-testid="input"
-          className="mt-5"
-          theme={!formik.errors.password}
+          // theme={!formik.errors.password}
           // placeholder="Password"
           id="password"
           name="password"
           type="password"
           onChange={formik.handleChange}
           value={formik.values.password}
-          lock={true}
         />
+        <img className="icon" src={lock} alt="" />
         </div>
 
-        {/* BODY OF FORM TO IMPLEMENT! */}
+        <LoginButton data-testid="click" type="submit">
+              Create Account
+        </LoginButton>
+
+        <P>Do you have an account already? Log in <Link href="/">here</Link>.</P>
+      
+        <P style={{width:'421px'}}>By clicking Create Account you agree for <Link href="/">Terms</Link> 
+        <br />
+         and have read our <Link href="/">Privacy statment</Link></P>
+
       </form>
     </FormBox>
+    </>
   );
 };

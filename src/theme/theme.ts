@@ -5,5 +5,8 @@ export const theme = {
     activeButton: '#4B4B4B',
     border:'#C6C6C6',
     header: '#1F295A',
-    label: '#9D9D9D'
+    label: '#9D9D9D',
+    loginBackground:'#D1DEFF',
+    loginFont: '#7086AB',
+    filledInput: '#9FD276'
 };
